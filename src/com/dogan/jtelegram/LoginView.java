@@ -9,6 +9,8 @@ import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Form;
 import javax.microedition.midlet.MIDletStateChangeException;
 
+import org.bouncycastle.util.IPAddress;
+
 public class LoginView extends Form implements CommandListener {
 	private JTelegramMIDlet midlet; // Root View
 	private Displayable caller;    // Caller View
@@ -43,6 +45,7 @@ public class LoginView extends Form implements CommandListener {
 	
 	private void initializeForm(Form form) {
 		// setup ui
+		System.out.println(IPAddress.isValidIPv4("192.168.1.256"));
 	}
 
 	public void commandAction(Command arg0, Displayable arg1) {
@@ -56,13 +59,13 @@ public class LoginView extends Form implements CommandListener {
 			}
 	        midlet.notifyDestroyed();
 	    } else if (arg0 == commandSelect) {
-	    	infoAlert = new Alert("Bildirim", "Orta tuþ basýldý", null, AlertType.INFO);
+	    	infoAlert = new Alert("Bildirim", "Select wrapper", null, AlertType.INFO);
 	    	infoAlert.setTimeout(Alert.FOREVER);
 	    	display.setCurrent(infoAlert, this);
 	    } else if (arg0 == commandAbout) {
 	    	display.setCurrent(aboutView);
 	    } else if (arg0 == commandOptions) {
-	    	infoAlert = new Alert("Bildirim", "Seçenek basýldý", null, AlertType.INFO);
+	    	infoAlert = new Alert("Bildirim", "Settings wrapper", null, AlertType.INFO);
 	    	infoAlert.setTimeout(Alert.FOREVER);
 	    	display.setCurrent(infoAlert, this);
 	    }

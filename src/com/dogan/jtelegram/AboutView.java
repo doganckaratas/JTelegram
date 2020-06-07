@@ -44,10 +44,10 @@ public class AboutView extends Form implements CommandListener {
 			StringItem title = new StringItem(null, "\n" + midlet.getAppProperty("MIDlet-Name") + " " + midlet.getAppProperty("MIDlet-Version") + "\n");
 			title.setLayout(StringItem.LAYOUT_CENTER);
 			form.append(title);
-			StringItem description = new StringItem(null, "Java cihazlar için Telegram istemcisi\n\n\n");
-			description.setLayout(StringItem.LAYOUT_DEFAULT);
+			StringItem description = new StringItem(null, "\nJava cihazlar için\nTelegram istemcisi\n");
+			description.setLayout(StringItem.LAYOUT_CENTER);
 			form.append(description);
-			StringItem author = new StringItem(null, "Yazar: Doðan C. Karataþ\nTarih: Haziran 2020\nhttp://github.com/doganckaratas");
+			StringItem author = new StringItem(null, "\n\nYazar: Doðan C. Karataþ\nTarih: Haziran 2020\nhttp://github.com/doganckaratas");
 			author.setLayout(StringItem.LAYOUT_DEFAULT);
 			form.append(author);
 			
