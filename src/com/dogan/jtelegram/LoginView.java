@@ -9,13 +9,12 @@ import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Form;
 import javax.microedition.midlet.MIDletStateChangeException;
 
-import org.bouncycastle.util.IPAddress;
-
 public class LoginView extends Form implements CommandListener {
 	private JTelegramMIDlet midlet; // Root View
 	private Displayable caller;    // Caller View
 	private AboutView aboutView;
-	private Command commandExit, commandSelect, commandOptions, commandAbout;
+	private SettingsView settingsView;
+	private Command commandExit, commandSelect, commandSettings, commandAbout;
 	private Display display;
 	private Alert infoAlert;
 
@@ -24,6 +23,7 @@ public class LoginView extends Form implements CommandListener {
 		this.midlet = midlet;
 		this.caller = caller;
 		aboutView = new AboutView(midlet, this, "Hakkýnda");
+		settingsView = new SettingsView(midlet, this, "Ayarlar");
 		display = Display.getDisplay(midlet);
 		
 		initializeMenu(this);
@@ -33,11 +33,11 @@ public class LoginView extends Form implements CommandListener {
 	private void initializeMenu(Form form) {
 		commandExit = new Command("Çýkýþ", Command.EXIT, 0);
 		commandSelect = new Command("Seç", Command.ITEM, 0);
-		commandOptions = new Command("Ayarlar", Command.SCREEN, 0);
+		commandSettings = new Command("Ayarlar", Command.SCREEN, 0);
 		commandAbout = new Command("Hakkýnda", Command.SCREEN, 0);
 		
 		addCommand(commandSelect);
-		addCommand(commandOptions);
+		addCommand(commandSettings);
 		addCommand(commandAbout);
 		addCommand(commandExit);
 		setCommandListener(this);
@@ -45,7 +45,7 @@ public class LoginView extends Form implements CommandListener {
 	
 	private void initializeForm(Form form) {
 		// setup ui
-		System.out.println(IPAddress.isValidIPv4("192.168.1.256"));
+		
 	}
 
 	public void commandAction(Command arg0, Displayable arg1) {
@@ -64,10 +64,8 @@ public class LoginView extends Form implements CommandListener {
 	    	display.setCurrent(infoAlert, this);
 	    } else if (arg0 == commandAbout) {
 	    	display.setCurrent(aboutView);
-	    } else if (arg0 == commandOptions) {
-	    	infoAlert = new Alert("Bildirim", "Settings wrapper", null, AlertType.INFO);
-	    	infoAlert.setTimeout(Alert.FOREVER);
-	    	display.setCurrent(infoAlert, this);
+	    } else if (arg0 == commandSettings) {
+	    	display.setCurrent(settingsView);
 	    }
 	}
 }
