@@ -1,16 +1,10 @@
 package com.dogan.jtelegram;
 
-import java.io.IOException;
-
-import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Form;
-import javax.microedition.lcdui.Image;
-import javax.microedition.lcdui.ImageItem;
-import javax.microedition.lcdui.StringItem;
 
 public class SettingsView extends Form implements CommandListener {
 	private JTelegramMIDlet midlet;
