@@ -5,18 +5,18 @@ import javax.microedition.midlet.*;
 
 public class JTelegramMIDlet extends MIDlet {
 
-	private LoginView loginView; // Initial View
+	private ConversationView conversationView; // Initial View
 	private Display display;
 
 	public JTelegramMIDlet() {
 		// Constructor
 		display = Display.getDisplay(this);
-		loginView = new LoginView(this, display.getCurrent(), System.getProperty("MIDlet-Name"));
+		conversationView = new ConversationView(this, display.getCurrent(), "Konuþma Listesi");
 	}
 
 	protected void startApp() throws MIDletStateChangeException {
 		// TODO Auto-generated method stub
-		display.setCurrent(loginView);
+		display.setCurrent(conversationView);
 	}
 
 	protected void destroyApp(boolean arg0) throws MIDletStateChangeException {

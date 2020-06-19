@@ -1,5 +1,6 @@
 package com.dogan.jtelegram;
 
+import javax.microedition.io.HttpsConnection;
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Command;
@@ -7,23 +8,27 @@ import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Form;
+import javax.microedition.lcdui.TextBox;
+import javax.microedition.lcdui.TextField;
 import javax.microedition.midlet.MIDletStateChangeException;
 
-public class LoginView extends Form implements CommandListener {
+public class ConversationView extends Form implements CommandListener {
 	private JTelegramMIDlet midlet; // Root View
 	private Displayable caller;    // Caller View
 	private AboutView aboutView;
 	private SettingsView settingsView;
+	private ChatView chatView;
 	private Command commandExit, commandSelect, commandSettings, commandAbout;
+	private Command commandAddConversation, commandRemoveConversation, commandRefreshList;
 	private Display display;
-	private Alert infoAlert;
 
-	public LoginView(JTelegramMIDlet midlet, Displayable caller, String title) {
+	public ConversationView(JTelegramMIDlet midlet, Displayable caller, String title) {
 		super(title);
 		this.midlet = midlet;
 		this.caller = caller;
-		aboutView = new AboutView(midlet, this, "Hakkýnda");
+		aboutView = new AboutView(midlet, this, System.getProperty("MIDlet-Name"));
 		settingsView = new SettingsView(midlet, this, "Ayarlar");
+		chatView = new ChatView(midlet, this, "Mesajlar");
 		display = Display.getDisplay(midlet);
 		
 		initializeMenu(this);
@@ -33,19 +38,29 @@ public class LoginView extends Form implements CommandListener {
 	private void initializeMenu(Form form) {
 		commandExit = new Command("Çýkýþ", Command.EXIT, 0);
 		commandSelect = new Command("Seç", Command.ITEM, 0);
+		commandAddConversation = new Command("Konuþma Ekle", Command.SCREEN, 0);
+		commandRemoveConversation = new Command("Konuþma Sil", Command.SCREEN, 0);
+		commandRefreshList = new Command("Yenile", Command.SCREEN, 0);
 		commandSettings = new Command("Ayarlar", Command.SCREEN, 0);
 		commandAbout = new Command("Hakkýnda", Command.SCREEN, 0);
 		
 		addCommand(commandSelect);
+		addCommand(commandAddConversation);
+		addCommand(commandRemoveConversation);
+		addCommand(commandRefreshList);
 		addCommand(commandSettings);
 		addCommand(commandAbout);
 		addCommand(commandExit);
 		setCommandListener(this);
 	}
-	
+
 	private void initializeForm(Form form) {
 		// setup ui
-		
+		// basically conversation selector ui.
+		// add user-id to list
+		// delete user id from list
+		// show if there is new messages to added user-ids
+		// select user-id for chatview
 	}
 
 	public void commandAction(Command arg0, Displayable arg1) {
@@ -59,9 +74,9 @@ public class LoginView extends Form implements CommandListener {
 			}
 	        midlet.notifyDestroyed();
 	    } else if (arg0 == commandSelect) {
-	    	infoAlert = new Alert("Bildirim", "Select wrapper", null, AlertType.INFO);
-	    	infoAlert.setTimeout(Alert.FOREVER);
-	    	display.setCurrent(infoAlert, this);
+	    	// get item name and pass it to chatView, delete from ctor
+	    	// chatView = new ChatView(midlet, this, user);
+	    	display.setCurrent(chatView);
 	    } else if (arg0 == commandAbout) {
 	    	display.setCurrent(aboutView);
 	    } else if (arg0 == commandSettings) {

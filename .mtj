@@ -8,8 +8,8 @@
       <configuration active="true" name="S40_5th_Edition_SDK">
          <device group="Series 40 5th Edition SDK" name="S40_5th_Edition_SDK"/>
          <symbolSet name="S40_5th_Edition_SDK">
-            <symbol name="MMAPI" value="1.1"/>
             <symbol name="screen.isColor" value="true"/>
+            <symbol name="MMAPI" value="1.1"/>
             <symbol name="model" value="Series 40 5th Edition SDK"/>
             <symbol name="screen.bitDepth" value="16"/>
             <symbol name="JSR82" value="1.1"/>
@@ -18,8 +18,8 @@
             <symbol name="CLDC" value="1.0"/>
             <symbol name="screen.canvas.height" value="248"/>
             <symbol name="WMA" value="1.1"/>
-            <symbol name="a_3D_API" value="1.1"/>
             <symbol name="screen.width" value="240"/>
+            <symbol name="a_3D_API" value="1.1"/>
             <symbol name="AMMS" value="1.0"/>
             <symbol name="screen.isTouch" value="false"/>
             <symbol name="screen.canvas.width" value="240"/>
