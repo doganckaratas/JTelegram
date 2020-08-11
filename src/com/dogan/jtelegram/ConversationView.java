@@ -11,24 +11,27 @@ import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.TextBox;
 import javax.microedition.lcdui.TextField;
 import javax.microedition.midlet.MIDletStateChangeException;
+import javax.microedition.rms.RecordStoreException;
+import javax.microedition.rms.RecordStoreFullException;
+import javax.microedition.rms.RecordStoreNotFoundException;
 
 public class ConversationView extends Form implements CommandListener {
 	private JTelegramMIDlet midlet; // Root View
 	private Displayable caller;    // Caller View
-	private AboutView aboutView;
-	private SettingsView settingsView;
-	private ChatView chatView;
+//	private AboutView aboutView;
+//	private SettingsView settingsView;
+//	private ChatView chatView;
 	private Command commandExit, commandSelect, commandSettings, commandAbout;
 	private Command commandAddConversation, commandRemoveConversation, commandRefreshList;
 	private Display display;
 
-	public ConversationView(JTelegramMIDlet midlet, Displayable caller, String title) {
+	public ConversationView(JTelegramMIDlet midlet, Displayable caller, String title) throws RecordStoreFullException, RecordStoreNotFoundException, RecordStoreException {
 		super(title);
 		this.midlet = midlet;
 		this.caller = caller;
-		aboutView = new AboutView(midlet, this, System.getProperty("MIDlet-Name"));
-		settingsView = new SettingsView(midlet, this, "Ayarlar");
-		chatView = new ChatView(midlet, this, "Mesajlar");
+//		aboutView = new AboutView(midlet, this, System.getProperty("MIDlet-Name"));
+//		settingsView = new SettingsView(midlet, this, "Ayarlar");
+//		chatView = new ChatView(midlet, this, "Mesajlar");
 		display = Display.getDisplay(midlet);
 		
 		initializeMenu(this);
@@ -36,13 +39,13 @@ public class ConversationView extends Form implements CommandListener {
 	}
 	
 	private void initializeMenu(Form form) {
-		commandExit = new Command("Çýkýþ", Command.EXIT, 0);
-		commandSelect = new Command("Seç", Command.ITEM, 0);
-		commandAddConversation = new Command("Konuþma Ekle", Command.SCREEN, 0);
-		commandRemoveConversation = new Command("Konuþma Sil", Command.SCREEN, 0);
+		commandExit = new Command("ï¿½ï¿½kï¿½ï¿½", Command.EXIT, 0);
+		commandSelect = new Command("Seï¿½", Command.ITEM, 0);
+		commandAddConversation = new Command("Konuï¿½ma Ekle", Command.SCREEN, 0);
+		commandRemoveConversation = new Command("Konuï¿½ma Sil", Command.SCREEN, 0);
 		commandRefreshList = new Command("Yenile", Command.SCREEN, 0);
 		commandSettings = new Command("Ayarlar", Command.SCREEN, 0);
-		commandAbout = new Command("Hakkýnda", Command.SCREEN, 0);
+		commandAbout = new Command("Hakkï¿½nda", Command.SCREEN, 0);
 		
 		addCommand(commandSelect);
 		addCommand(commandAddConversation);
@@ -75,12 +78,12 @@ public class ConversationView extends Form implements CommandListener {
 	        midlet.notifyDestroyed();
 	    } else if (arg0 == commandSelect) {
 	    	// get item name and pass it to chatView, delete from ctor
-	    	// chatView = new ChatView(midlet, this, user);
-	    	display.setCurrent(chatView);
+			// chatView = new ChatView(midlet, this, user);
+			display.setCurrent(JTelegramMIDlet.chatView);
 	    } else if (arg0 == commandAbout) {
-	    	display.setCurrent(aboutView);
+			display.setCurrent(JTelegramMIDlet.aboutView);
 	    } else if (arg0 == commandSettings) {
-	    	display.setCurrent(settingsView);
+			display.setCurrent(JTelegramMIDlet.settingsView);
 	    }
 	}
 }
